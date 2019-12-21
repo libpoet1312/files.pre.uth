@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Course Detail{% endblock %}
+
+{% block content %}
+{% include 'www/search_bar.html' %}
+
+<h2>{{ course.name }} - ({{ course.courseid }})</h2>
+<hr/>
+
+{% for file in file_list %}
+
+<div class="card border-dark">
+    <div class="card-header bg-dark">
+          <a href="{{ file.get_absolute_url }}" style="color: white">{{ file.title }}</a>
+    </div>
+    <div class="card-body">
+        <div class="row text-center" style="margin-bottom: 7px;">
+            <div class="col">
+                Summary
+            </div>
+            <div class="col">
+                Date Uploaded
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-justify">
+                <small class="text-muted ">{{ file.summary|truncatewords:9 }}</small>
+            </div>
+            <div class="col" style="margin: auto">
+              <small class="text-muted">{{ file.dateCreated }}</small>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endfor %}
+
+{% endblock %}

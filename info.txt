@@ -1,0 +1,40 @@
+Attributes:{edupersonorgdn=eduPersonOrgDN: dc=uth,dc=gr,
+edupersonprincipalname=eduPersonPrincipalName: npappas@uth.gr,
+schacuserstatus=schacUserStatus: urn:schac:userStatus:gr:uth.gr:vpn:active,
+urn:schac:userStatus:gr:uth.gr:is:active, urn:schac:userStatus:gr:uth.gr:mailbox:active,
+urn:schac:userStatus:gr:uth.gr:smtp:active, mail=mail: npappas@uth.gr, uid=uid: npappas, sambalmpassword=sambaLMPassword: -,
+givenname;lang-el=givenName;lang-el: ΝΙΚΟΛΑΟΣ, maillocaladdress=mailLocalAddress: npappas@uth.gr, npappas@inf.uth.gr, cn;lang-el=cn;lang-el: ΠΑΠΠΑΣ ΝΙΚΟΛΑΟΣ,
+objectclass=objectClass: top, person, organizationalPerson, inetOrgPerson, eduPerson, radiusprofile, posixAccount, sambaSamAccount, schacPersonalCharacteristics,
+schacContactLocation, schacLinkageIdentifiers, grEduPerson, qmailUser, inetLocalMailRecipient, schacUserEntitlements, systemQuotas, uidnumber=uidNumber: 15322, sn=sn: PAPPAS,
+employeenumber=employeeNumber: -, gidnumber=gidNumber: 50138, mailalternateaddress=mailAlternateAddress: billpap1@otenet.gr,
+schacpersonaluniquecode=schacPersonalUniqueCode: urn:mace:terena.org:schac:personalUniqueCode:gr:uth.gr:1713010,
+userpassword=userPassword: [B@643bc0e3, gredupersonundergraduatebranch=grEduPersonUndergraduateBranch: 220,
+edupersonorgunitdn=eduPersonOrgUnitDN: ou=inf,dc=uth,dc=gr, mailhost=mailHost: mailhost6.uth.gr, dialupaccess=dialupAccess: TRUE, cn=cn: PAPPAS NIKOLAOS,
+sambantpassword=sambaNTPassword: 1796254F53A6BCAD550F5C1A5FE1341C, ou=ou: NIL, sn;lang-el=sn;lang-el: ΠΑΠΠΑΣ, schachomeorganization=schacHomeOrganization: uth.gr,
+edupersonentitlement=eduPersonEntitlement: urn:mace:uth.gr:dreamSpark:100033117, homedirectory=homeDirectory: /home/users/n/npappas, givenname=givenName: NIKOLAOS,
+displayname=displayName: PAPPAS NIKOLAOS, radiusprofiledn=radiusProfileDn: cn=default-dialup,ou=radius-profiles,dc=uth,dc=gr,
+sambasid=sambaSID: S-1-5-21-4174298068-2450942048-766155922-15322, edupersonprimaryaffiliation=eduPersonPrimaryAffiliation: student,
+edupersonprimaryorgunitdn=eduPersonPrimaryOrgUnitDN: ou=inf,dc=uth,dc=gr, edupersonaffiliation=eduPersonAffiliation: student, loginshell=loginShell: /sbin/nologin}
+
+
+class FileListView(generic.ListView):
+    model = File
+    template_name = "file_list.html"
+    context_object_name = 'file_list'
+    paginate_by = 2
+    serializer_class = FileSerializers
+
+    def get_queryset(self):
+        try:
+            qs = self.request.GET.get('search_query',)
+            print(qs)
+        except KeyError:
+            qs = None
+        if qs:
+            file_list = File.objects.filter(
+                Q(title__icontains=qs) |
+                Q(summary__icontains=qs)
+            )
+        else:
+            file_list = File.objects.all()
+        return file_list

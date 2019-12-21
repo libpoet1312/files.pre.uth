@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Course List{% endblock %}
+
+{% block content %}
+
+  {% if course_list %}
+    {% for course in course_list %}
+      <div class="card border-dark">
+        <div class="card-header bg-dark">
+          <a href="{{ course.get_absolute_url }}" style="color: white">{{ course.name }} - ({{ course.courseid }})</a>
+        </div>
+      </div>
+    {% endfor %}
+
+    {% include 'www/pagination.html' %}
+  {% else %}
+    <p>There are no courses in the repos.</p>
+  {% endif %}
+{% endblock %}

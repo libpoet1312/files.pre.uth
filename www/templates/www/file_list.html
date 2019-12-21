@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}List{% endblock %}
+
+{% block content %}
+  {% include 'www/search_bar.html' %}
+
+
+  {% if file_list %}
+    {% for file in file_list %}
+      <div class="card border-dark">
+        <div class="card-header bg-dark">
+          <a href="{{ file.get_absolute_url }}" style="color: white">{{ file.title }}</a>
+        </div>
+        <div class="card-body px-3">
+          <div class="row text-center" >
+            <div class="col">
+              Summary
+            </div>
+            <div class="col">
+              Course
+            </div>
+            <div class="col">
+              Date Uploaded
+            </div>
+          </div>
+          <hr/>
+          <div class="row">
+            <div class="col text-justify" style="border-right: dimgrey solid">
+              <small class="text-muted ">{{ file.summary|truncatewords:9 }}</small>
+            </div>
+            <div class="col" style="border-right: dimgrey solid;margin: auto">
+              <small class="text-muted"><a href="{{ file.get_course_url }}" class="text-muted">{{ file.display_course }} </a></small>
+            </div>
+            <div class="col" style="margin: auto">
+              <small class="text-muted">{{ file.dateCreated }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    {% include 'www/pagination.html' %}
+  {% else %}
+    <p>There are no files in the repos.</p>
+  {% endif %}
+{% endblock %}

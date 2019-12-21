@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+body {
+  background: #6994c4;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+#sticky-footer {
+  color: white;
+  flex-shrink: none;
+}
+
+.masthead img{
+  width:100%;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, li, input, .h1, .h2, .h3, .h4, .h5, .h6, .p, .ul, .li, .input{
+margin-bottom: 0.5rem;
+font-family: 'Ubuntu', sans-serif;
+line-height: 1;
+color: inherit;
+}
+
+.card {
+  border: 1px solid;
+  text-align: center;
+  width:100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.navbar {
+  color: white;
+}
+main {
+  border: 3px solid;
+  background: #f2ffff;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.page-link .page-current .page-item{
+  color: black;
+}
+

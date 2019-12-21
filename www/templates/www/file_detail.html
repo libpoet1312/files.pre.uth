@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}File Detail{% endblock %}
+
+{% block content %}
+
+<div class="card border-dark">
+  <div class="card-header bg-dark" style="color: white">
+    <h2>{{ file.title }}</h2>
+  </div>
+
+
+
+  <div class="card-body">
+    <h6 class="card-title">Summary</h6>
+        <div class="col text-justify">
+          <p class="card-text" style="font-size: 85%">{{file.summary}}</p><br>
+        </div>
+
+    <h6 class="card-title">Course</h6>
+      <div class="col">
+        <p class="card-text"><a href="{{ file.get_course_url }}" class="text-info">{{ file.display_course }}</a></p><br>
+      </div>
+
+    <h6 class="card-title">Tags</h6>
+    <div class="col">
+      <p class="card-text" style="font-size: 85%">{{file.tags}}</p><br>
+    </div>
+    <h6 class="card-title">Author</h6>
+    <div class="col">
+      <p class="card-text" style="font-size: 85%">{{file.author}}</p><br>
+    </div>
+    <a href="{{ file.upload.url }}" target="_blank" class="btn btn-dark">Download File</a>
+
+  </div>
+</div>
+
+{% endblock %}

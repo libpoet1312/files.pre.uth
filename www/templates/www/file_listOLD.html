@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}List{% endblock %}
+
+{% block content %}
+<h1>File List</h1>
+
+  <!--
+
+  <ul>
+    {% for file in file_list %}
+      <li>
+        <a href="{{ file.get_absolute_url }}">{{ file.title }}</a> ({{file.author}})
+      </li>
+    {% endfor %}
+  </ul>
+
+
+  -->
+
+  {% if file_list %}
+    {% for file in file_list %}
+      <div class="card  border-dark">
+        <div class="card-header bg-dark">
+          <a href="{{ file.get_absolute_url }}" style="color: white">{{ file.title }}</a>
+        </div>
+        <div class="card-body p-3">
+          <div class="row">
+            <div class="col-2 ">
+              Summary<br>
+              <small class="text-muted">{{ file.summary|truncatewords:4 }}</small>
+            </div>
+            <div class="col-10 border">
+              <div class="row mb-3">
+                <div class="col-6">
+                  Author<br>
+                  <small class="text-muted">{{ file.author }}</small>
+                </div>
+                <div class=" col-6 text-right">
+                  Date uploaded<br>
+                  <div class="text-muted"><small>{{ file.dateCreated }}</small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    {% include 'www/pagination.html' %}
+  {% else %}
+    <p>There are no files in the repos.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1 style="text-align:center">Ανέβασμα Αρχείου</h1>
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="margin:10px; padding-left:100px"">
+            <div class="col-md-6 col-md-offset-3">
+
+                <!-- Form - Blog Post -->
+                <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <div class="col-sm-9">
+
+                            <!-- Errors - title -->
+                            {% if form.title.errors %}
+                                <label class="alert alert-danger">{{ form.title.errors }}</label>
+                            {% endif %}
+
+                            <!-- Form field - title -->
+                            <input type="text"
+                                   placeholder="Title"
+                                   class="form-control"
+                                   name="title"
+                                   value="{{ form.title.value|default:"" }}">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-9">
+
+                            <!-- Errors - body -->
+                            {% if form.body.errors %}
+                                <label class="alert alert-danger">{{ form.body.errors }}</label>
+                            {% endif %}
+
+                            <!-- Form fields - body -->
+                            <textarea placeholder="summary"
+                                      class="form-control"
+                                      name="summary">{{ form.body.value|default:"" }}</textarea>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-9">
+
+                            <input type="file" name="document">
+                            {{ form|crispy }}
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-9">
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block">Save</button>
+
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

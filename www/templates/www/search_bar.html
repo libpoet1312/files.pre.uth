@@ -1,0 +1,52 @@
+{% load widget_tweaks %}
+<!-- search Form -->
+<div class="container">
+    <form method="GET" action="{% url 'www:browse-files' %}">
+        <div class="form-row">
+            <div class="form-group col-12">
+                <div class="input-group">
+                    <input class="form-control" type="search" name="text_contains" placeholder="Αναζήτηση Εργασιών..." />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label for="category">In Courses</label>
+          <select id="category" class="form-control" name="course">
+            <option selected>Choose...</option>
+            {% for co in courses %}
+            <option value="{{ co }}">{{ co }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+
+</div>
+<hr/>
+
+
+<!--
+<div class="container">
+
+    <form class="input-group" method="get" action="{% url 'www:browse-files' %}"  >
+        <input type="text" class="form-control" placeholder="Αναζήτηση Εργασιών" name="search_query">
+
+        <div class="form-group">
+            <select id="course" class="form-control-sm" name="course">
+                <option selected>Choose...</option>
+                {% for co in courses %}
+                <option value="{{ co }}">{{ co }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-secondary" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </form>
+    <br>
+</div>
+<hr/>
+-->

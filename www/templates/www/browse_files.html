@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Browse{% endblock %}
+
+{% block content %}
+<!-- search Form -->
+<div class="container">
+  <form class="input-group" method="GET" action="{% url 'www:index' %}">
+    <input type="text" class="form-control" placeholder="Αναζήτηση Εργασιών" >
+      <div class="input-group-append">
+        <button class="btn btn-secondary" type="submit" method="GET">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+  </form>
+ </div>
+  <!-- all posts -->
+    <!-- Files Entries Column -->
+  <div class="row justify-content-center align-items-center" >
+    <h1>Last uploads</h1>
+    <br>
+    <!-- Blog Post -->
+      {% for file in files %}
+      <div class="card mb-3" >
+
+          <div class="card-body">
+              <h5 class="card-title">{{ file.title }}</h5>
+              <p class="card-text">{{ file.summary|truncatewords:15 }}</p>
+
+              <a href="{% url 'www:file-detail' file.pk %}" class="btn btn-primary">Read More</a>
+              <p class="card-text font-italic" style="text-align:right">Uploaded by: {{ file.author }}</p>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+
+  {% block pagination %}
+
+  {% if is_paginated %}
+  <div class="pagination">
+      <span class="page-links">
+          {% if page_obj.has_previous %}
+              <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+          {% endif %}
+          <span class="page-current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+          </span>
+          {% if page_obj.has_next %}
+              <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+          {% endif %}
+      </span>
+  </div>
+  {% endif %}
+  {% endblock %}
+
+{% endblock %}
