@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from autoslug import AutoSlugField
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class Tag(models.Model):
@@ -56,7 +57,8 @@ class File(models.Model):
     summary = models.TextField(max_length=1000, help_text='Enter a brief description of the file')
 
     # ManyToManyField used because tag & course can contain many files. Files can cover many Tags & Courses.
-    tag = models.ManyToManyField(Tag, help_text='Select a tag for this file', blank=True)
+    #tag = models.ManyToManyField(Tag, help_text='Select a tag for this file', blank=True)
+
     course = models.ManyToManyField(Course, help_text='Select a course for this file')
 
     upload = models.FileField(upload_to='', null=True)
@@ -81,7 +83,7 @@ class File(models.Model):
         """Create a string for the course. This is required to display course in Admin."""
         string = ' , '.join(course.name for course in self.course.all())
         string2 = ' , '.join(course.courseid for course in self.course.all())
-        #print(string,string2)
+
         return string+' '+string2
         #return ' , '.join(course.name for course in self.course.all())+' '+' , '.join(course.courseid for course in self.course.all())
 

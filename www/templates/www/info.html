@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Πληροφορίες{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h4 class="card-header">
+        Αποθετήριο Εργασιών του τμήματος Δημοτικής Αγωγής του Πανεπιστημίου Θεσσαλίας
+    </h4>
+
+    <div class="card-body px-0">
+        <p>Το παρόν site είναι project για το μάθημα Τεχνολογίες Παγκόσμιου Ιστού του τμήματους ΗΜΜΥ του Π.Θ.</p>
+
+        <p>Η υλοποίησή του γίνεται σε django framework με την χρήση της mariadb ως βάσης δεδομένων.</p>
+        <hr/>
+
+        <p>Η σύνδεση στο site πραγματοποιείται με τους κωδικούς του Πανεπιστημίου.
+        </p>
+        <hr/>
+        <p>Αποτελεί ένα αποθετήριο εργασιών/διπλωματικών των φοιτητών/τριών του Π.Θ.</p>
+        <p>Για την καταχώρηση εργασιών στο site είναι απαραίτητη η σύνδεση</p>
+    </div>
+
+
+    <a class="card-link btn btn-dark" href="{% url 'www:browse-courses'%}" >Browse Courses</a>
+
+</div>
+
+{% endblock %}

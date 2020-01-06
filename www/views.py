@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .filters import FileFilter
 from django.shortcuts import get_object_or_404, get_list_or_404
+from taggit.models import Tag
 
 
 def index(request):
@@ -160,6 +161,9 @@ def upload_file(request):
         if form.is_valid():
             note = form.save(commit=False)
             note.author = request.user
+            print(request.POST.get('course'))
+
+            print(request.POST.get('tag'))
             note.save()
             return redirect('www:index')
     else:

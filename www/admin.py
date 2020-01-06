@@ -19,12 +19,7 @@ admin.site.register(Author, AuthorAdmin)
 @admin.register(File)
 class FileAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'display_course',)
-    list_filter = ('course', 'tag')
-
-# Register the Admin classes for Tag using the decorator
-@admin.register(Tag)
-class TagAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ('course',)
 
 # Register the Admin classes for Course using the decorator
 @admin.register(Course)
